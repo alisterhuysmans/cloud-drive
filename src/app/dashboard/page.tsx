@@ -7,7 +7,7 @@ import TableWrapper from "@/components/table/TableWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "File Manager",
+    title: "Dashboard | Cloud Drive",
     description: "Manage your files seamlessly",
 };
 
