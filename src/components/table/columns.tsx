@@ -9,7 +9,7 @@ import { COLOR_EXTENSION_MAP } from "@/constants";
 export const columns: ColumnDef<FileType>[] = [
     {
         accessorKey: "type",
-        header: "type",
+        header: "Type",
         cell: ({ renderValue, ...props }) => {
             const type = renderValue() as string;
             const extension: string = type.split("/")[1];
