@@ -1,13 +1,17 @@
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/firebase";
-import GalleryHeader from "@/components/GalleryHeader";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import Dropzone from "@/components/Dropzone";
 import { FileType } from "@/types";
 import { collection, getDocs } from "firebase/firestore";
 import TableWrapper from "@/components/table/TableWrapper";
+import { Metadata } from "next";
 
-async function Gallery() {
+export const metadata: Metadata = {
+    title: "File Manager",
+    description: "Manage your files seamlessly",
+};
+
+async function Dashboard() {
     const { userId } = auth();
 
     const docsResults = await getDocs(
@@ -27,24 +31,16 @@ async function Gallery() {
     // console.log(skeletonFiles);
 
     return (
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-        >
-            <GalleryHeader />
-            <main className="border-t">
-                <Dropzone />
-                <section className="container space-y-5">
-                    <h2 className="font-bold">All files</h2>
-                    <div>
-                        <TableWrapper skeletonFiles={skeletonFiles} />
-                    </div>
-                </section>
-            </main>
-        </ThemeProvider>
+        <main className="border-t">
+            <Dropzone />
+            <section className="container space-y-5">
+                <h2 className="font-medium">All files</h2>
+                <div>
+                    <TableWrapper skeletonFiles={skeletonFiles} />
+                </div>
+            </section>
+        </main>
     );
 }
 
-export default Gallery;
+export default Dashboard;

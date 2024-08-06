@@ -4,6 +4,15 @@
 
 @layer base {
     :root {
+        --color1: 18, 113, 255;
+        --color2: 221, 74, 255;
+        --color3: 100, 220, 255;
+        --color4: 200, 50, 50;
+        --color5: 180, 180, 50;
+        --color-interactive: 140, 100, 255;
+        --circle-size: 80%;
+        --blending: hard-light;
+
         /* --background: 48 13% 92%; */
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;
@@ -33,6 +42,24 @@
     }
 
     .dark {
+        /* --color1: 10, 90, 200;
+        --color2: 170, 60, 220;
+        --color3: 80, 180, 220;
+        --color4: 140, 40, 40;
+        --color5: 130, 130, 40;
+
+        --color-interactive: 100, 70, 200; */
+
+        --color1: 202, 255, 237;
+        --color2: 41, 109, 125;
+        --color3: 18, 99, 100;
+        --color4: 210, 101, 11;
+        --color5: 142, 71, 12;
+        /* --color5: 226, 86, 69; */
+        --circle-size: 100%;
+
+        --color-interactive: 144, 170, 161;
+
         --background: 222.2 84% 4.9%;
         --foreground: 210 40% 98%;
         --card: 222.2 84% 4.9%;
