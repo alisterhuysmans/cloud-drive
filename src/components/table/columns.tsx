@@ -55,4 +55,44 @@ export const columns: ColumnDef<FileType>[] = [
             );
         },
     },
+    // alternative to directly download the Files, but requires CORS config in Firebase Console 
+    // {
+    //     accessorKey: "downloadURL",
+    //     header: "Link",
+    //     cell: ({ renderValue, ...props }) => {
+    //         const url = renderValue() as string;
+    //         const filename = url.split("/").pop() || "file"; // Extract filename from URL
+
+    //         const handleDownload = async () => {
+    //             try {
+    //                 const response = await fetch(url);
+    //                 if (!response.ok) throw new Error("Failed to fetch file");
+
+    //                 const blob = await response.blob();
+    //                 const objectURL = URL.createObjectURL(blob);
+
+    //                 // Create a temporary link element
+    //                 const link = document.createElement("a");
+    //                 link.href = objectURL;
+    //                 link.download = filename; // Set filename for download
+    //                 document.body.appendChild(link); // Append link to the document
+    //                 link.click(); // Trigger click event
+    //                 document.body.removeChild(link); // Remove link from the document
+
+    //                 URL.revokeObjectURL(objectURL); // Clean up object URL
+    //             } catch (error) {
+    //                 console.error("Error downloading file:", error);
+    //             }
+    //         };
+
+    //         return (
+    //             <button
+    //                 onClick={handleDownload}
+    //                 className="underline text-blue-500 hover:text-blue-600"
+    //             >
+    //                 Download
+    //             </button>
+    //         );
+    //     },
+    // },
 ];

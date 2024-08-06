@@ -3,19 +3,17 @@
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog";
 import { useAppStore } from "../../store/store";
 import { useUser } from "@clerk/nextjs";
 import { deleteObject, ref } from "firebase/storage";
 import { db, storage } from "@/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 // customize dialog component from shadcn for the delete modal
 export function DeleteModal() {
@@ -31,6 +29,8 @@ export function DeleteModal() {
     async function deleteFile() {
         if (!user || !fileId) return;
 
+        const toastId = toast.loading("Deleting...");
+
         const fileRef = ref(storage, `users/${user.id}/files/${fileId}`);
 
         try {
@@ -38,7 +38,9 @@ export function DeleteModal() {
                 .then(async () => {
                     deleteDoc(doc(db, "users", user.id, "files", fileId)).then(
                         () => {
-                            console.log("Deleted!");
+                            toast.success("Deleted Successfully", {
+                                id: toastId,
+                            });
                         }
                     );
                 })
@@ -46,7 +48,9 @@ export function DeleteModal() {
                     setIsDeleteModalOpen(false);
                 });
         } catch (error) {
-            console.log(error);
+            toast.error("Error deleting document", {
+                id: toastId,
+            });
         }
 
         setIsDeleteModalOpen(false);
@@ -81,6 +85,7 @@ export function DeleteModal() {
                     <Button
                         type="submit"
                         size="sm"
+                        variant={"destructive"}
                         className="px-3 flex-1"
                         onClick={() => deleteFile()}
                     >
@@ -88,14 +93,6 @@ export function DeleteModal() {
                         <span>Delete</span>
                     </Button>
                 </div>
-
-                {/* <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary">
-                            Close
-                        </Button>
-                    </DialogClose>
-                </DialogFooter> */}
             </DialogContent>
         </Dialog>
     );
