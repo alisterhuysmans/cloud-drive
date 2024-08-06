@@ -88,14 +88,14 @@ function DropZone() {
                     <section>
                         <div
                             className={cn(
-                                "h-52 flex justify-center items-center p-5 m-3 border border-dashed rounded-lg text-center",
+                                "h-52 flex justify-center items-center p-5 m-3 border border-dashed rounded-lg text-center text-lg font-medium hover:cursor-pointer",
                                 isDragActive
                                     ? "bg-slate-600/50 dark:bg-slate-600/80 text-white animate-pulse"
                                     : "bg-slate-100/50 dark:bg-slate-800/80 text-slate-400"
                             )}
                             {...getRootProps()}
                         >
-                            <input {...getInputProps()} />
+                            <input {...getInputProps()} className="text-2xl" />
                             {!isDragActive &&
                                 "Click here or drop a file to upload!"}
                             {isDragActive &&

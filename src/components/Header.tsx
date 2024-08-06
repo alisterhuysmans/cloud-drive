@@ -4,7 +4,7 @@ import { ThemeToggler } from "./ThemeToggler";
 
 function Header() {
     return (
-        <header className="relative flex justify-between items-center px-4 py-3 gap-5 z-20">
+        <header className="relative flex justify-between items-center px-5 py-3 gap-5 z-20">
             <Link href={"/"} className="text-lg flex-1 font-semibold">
                 Cloud Drive
             </Link>

@@ -50,12 +50,12 @@ export const columns: ColumnDef<FileType>[] = [
                     target="_blank"
                     className="underline text-blue-500 hover:text-blue-600"
                 >
-                    Download
+                    Open File
                 </a>
             );
         },
     },
-    // alternative to directly download the Files, but requires CORS config in Firebase Console 
+    // alternative to directly download the Files, but requires CORS config in Firebase Console
     // {
     //     accessorKey: "downloadURL",
     //     header: "Link",

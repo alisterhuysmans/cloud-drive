@@ -85,12 +85,10 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body
-                    className={`relative ${ppneuemontreal.className}`}
-                >
+                <body className={`relative ${ppneuemontreal.className}`}>
                     <ThemeProvider
                         attribute="class"
-                        defaultTheme="system"
+                        defaultTheme="dark"
                         enableSystem
                         disableTransitionOnChange
                     >
