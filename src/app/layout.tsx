@@ -73,7 +73,7 @@ const ppneuemontreal = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "File Manager",
+    title: "Cloud Drive",
     description: "Seamlessly Access and Manage Your Files Anywhere.",
 };
 
