@@ -1,16 +1,26 @@
 import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import styles from "../styles/GalleryHeader.module.scss";
 import Link from "next/link";
+import { ThemeToggler } from "./ThemeToggler";
 
 function GalleryHeader() {
     return (
-        <header>
+        <header className="flex justify-between align-middle p-3 gap-10">
             <Link href={"/"}>Home</Link>
-            <div>GalleryHeader</div>
-            <UserButton />
-            <SignedOut>
-                <SignInButton fallbackRedirectUrl={"/gallery"} mode="modal" />
-            </SignedOut>
+            <div>Galerie privée</div>
+            <div className="flex align-middle">
+                <div className="mx-5">
+                    <ThemeToggler />
+                </div>
+                <div>
+                    <UserButton />
+                    <SignedOut>
+                        <SignInButton
+                            fallbackRedirectUrl={"/gallery"}
+                            mode="modal"
+                        />
+                    </SignedOut>
+                </div>
+            </div>
         </header>
     );
 }
