@@ -16,7 +16,7 @@ function TableWrapper({ skeletonFiles }: { skeletonFiles: FileType[] }) {
     const [initialFiles, setInitialFiles] = useState<FileType[]>([]);
     const [sort, setSort] = useState<"asc" | "desc">("desc");
 
-    const [docs, loading, error] = useCollection(
+    const [docs] = useCollection(
         user &&
             query(
                 collection(db, "users", user.id, "files"),
@@ -43,7 +43,7 @@ function TableWrapper({ skeletonFiles }: { skeletonFiles: FileType[] }) {
     if (docs?.docs.length === undefined)
         return (
             <div className="flex flex-col">
-                <Button variant={"outline"} className="ml-auto w-36 h-10 mb-5">
+                <Button variant={"outline"} className="mr-auto w-96 h-10 mb-5">
                     <Skeleton className="h-5 w-full" />
                 </Button>
 
@@ -71,14 +71,6 @@ function TableWrapper({ skeletonFiles }: { skeletonFiles: FileType[] }) {
 
     return (
         <div className="flex flex-col space-y-5 pb-10">
-            <Button
-                variant={"outline"}
-                className="ml-auto w-fit"
-                onClick={() => setSort(sort === "desc" ? "asc" : "desc")}
-            >
-                Sort by {sort === "desc" ? "Newest" : "Oldest"}
-            </Button>
-
             <DataTable columns={columns} data={initialFiles} />
         </div>
     );

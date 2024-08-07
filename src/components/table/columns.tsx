@@ -3,8 +3,10 @@
 import { FileType } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { FileIcon, defaultStyles } from "react-file-icon";
+import { ArrowUpDown } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 import { COLOR_EXTENSION_MAP } from "@/constants";
+import { Button } from "../ui/button";
 
 export const columns: ColumnDef<FileType>[] = [
     {
@@ -12,7 +14,7 @@ export const columns: ColumnDef<FileType>[] = [
         header: "Type",
         cell: ({ renderValue, ...props }) => {
             const type = renderValue() as string;
-            const extension: string = type.split("/")[1];
+            const extension = type.split("/")[1];
             return (
                 <div className="w-10">
                     <FileIcon
@@ -27,72 +29,52 @@ export const columns: ColumnDef<FileType>[] = [
     },
     {
         accessorKey: "filename",
-        header: "Filename",
+        header: ({ column }) => (
+            <Button
+                variant="ghost"
+                onClick={() =>
+                    column.toggleSorting(column.getIsSorted() === "asc")
+                }
+                className="p-0 hover:bg-transparent"
+            >
+                Filename
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+        ),
     },
     {
         accessorKey: "timestamp",
-        header: "Date added",
+        header: ({ column }) => (
+            <Button
+                variant="ghost"
+                onClick={() =>
+                    column.toggleSorting(column.getIsSorted() === "asc")
+                }
+                className="p-0 hover:bg-transparent"
+            >
+                Date added
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+        ),
     },
     {
         accessorKey: "size",
         header: "Size",
-        cell: ({ renderValue, ...props }) => {
-            return <span>{prettyBytes(renderValue() as number)}</span>;
-        },
+        cell: ({ renderValue, ...props }) => (
+            <span>{prettyBytes(renderValue() as number)}</span>
+        ),
     },
     {
         accessorKey: "downloadURL",
         header: "Link",
-        cell: ({ renderValue, ...props }) => {
-            return (
-                <a
-                    href={renderValue() as string}
-                    target="_blank"
-                    className="underline text-blue-500 hover:text-blue-600"
-                >
-                    Open File
-                </a>
-            );
-        },
+        cell: ({ renderValue, ...props }) => (
+            <a
+                href={renderValue() as string}
+                target="_blank"
+                className="text-blue-500 hover:text-blue-600 hover:underline"
+            >
+                Open
+            </a>
+        ),
     },
-    // alternative to directly download the Files, but requires CORS config in Firebase Console
-    // {
-    //     accessorKey: "downloadURL",
-    //     header: "Link",
-    //     cell: ({ renderValue, ...props }) => {
-    //         const url = renderValue() as string;
-    //         const filename = url.split("/").pop() || "file"; // Extract filename from URL
-
-    //         const handleDownload = async () => {
-    //             try {
-    //                 const response = await fetch(url);
-    //                 if (!response.ok) throw new Error("Failed to fetch file");
-
-    //                 const blob = await response.blob();
-    //                 const objectURL = URL.createObjectURL(blob);
-
-    //                 // Create a temporary link element
-    //                 const link = document.createElement("a");
-    //                 link.href = objectURL;
-    //                 link.download = filename; // Set filename for download
-    //                 document.body.appendChild(link); // Append link to the document
-    //                 link.click(); // Trigger click event
-    //                 document.body.removeChild(link); // Remove link from the document
-
-    //                 URL.revokeObjectURL(objectURL); // Clean up object URL
-    //             } catch (error) {
-    //                 console.error("Error downloading file:", error);
-    //             }
-    //         };
-
-    //         return (
-    //             <button
-    //                 onClick={handleDownload}
-    //                 className="underline text-blue-500 hover:text-blue-600"
-    //             >
-    //                 Download
-    //             </button>
-    //         );
-    //     },
-    // },
 ];
