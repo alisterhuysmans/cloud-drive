@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import "../styles/animated-gradient.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
@@ -71,11 +69,6 @@ const ppneuemontreal = localFont({
         },
     ],
 });
-
-export const metadata: Metadata = {
-    title: "Cloud Drive",
-    description: "Seamlessly Access and Manage Your Files Anywhere.",
-};
 
 export default function RootLayout({
     children,

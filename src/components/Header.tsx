@@ -8,13 +8,13 @@ function Header() {
     return (
         <header className="relative flex justify-between items-center px-5 py-3 gap-2 z-20">
             <div className="flex-1">
-                <Link href={"/"} className="w-fit text-lg font-semibold">
+                <Link href={"/"} className="w-fit text-xl font-semibold">
                     Cloud Drive
                 </Link>
             </div>
             <SignedIn>
                 <Button variant="link" className="px-0">
-                    <Link href={"/dashboard"}>
+                    <Link href={"/dashboard"} title="dashboard">
                         <CloudUpload strokeWidth={1.5} />
                     </Link>
                 </Button>

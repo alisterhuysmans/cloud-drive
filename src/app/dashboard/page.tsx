@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "@/firebase";
 import Dropzone from "@/components/Dropzone";
 import { FileType } from "@/types";
@@ -28,13 +28,27 @@ async function Dashboard() {
         size: doc.data().size,
     }));
 
-    // console.log(skeletonFiles);
+    const user = await currentUser();
+
+    let displayName = "";
+    if (user?.firstName || user?.lastName) {
+        if (user?.firstName) displayName += user.firstName;
+        if (user?.lastName)
+            displayName += (displayName ? " " : "") + user.lastName;
+    } else if (user?.emailAddresses && user.emailAddresses.length > 0) {
+        displayName = user.emailAddresses[0].emailAddress;
+    } else {
+        displayName = "User";
+    }
 
     return (
-        <main className="border-t">
+        <main className="border-t space-y-5">
             <Dropzone />
-            <section className="container space-y-5">
-                <h2 className="font-medium">All files</h2>
+            <section className="p-3 container">
+                <div className="flex justify-end items-center space-x-2">
+                    <h2 className="text-gray-400 font-normal">Connected as</h2>
+                    <span>{displayName}</span>
+                </div>
                 <div>
                     <TableWrapper skeletonFiles={skeletonFiles} />
                 </div>
