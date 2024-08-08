@@ -40,8 +40,7 @@ export function DataTable<TData, TValue>({
     data,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] =
-        useState<ColumnFiltersState>([]);
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
     const table = useReactTable({
         data,
@@ -94,7 +93,7 @@ export function DataTable<TData, TValue>({
                             .getColumn("filename")
                             ?.setFilterValue(event.target.value)
                     }
-                    className="max-w-sm"
+                    className="md:max-w-sm"
                 />
             </div>
             <div className="rounded-md border">

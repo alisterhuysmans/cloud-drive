@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect } from "react";
-import "@/styles/animated-gradient.css"; // Adjust the path as necessary
+import "@/styles/animated-gradient.css";
 
 export default function GradientBackground() {
     useEffect(() => {
